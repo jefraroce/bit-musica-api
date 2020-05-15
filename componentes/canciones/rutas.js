@@ -9,9 +9,9 @@ router.get('/', function (solicitud, respuesta) {
   Cancion.find(function (error, canciones) {
     if (error) {
       console.error('Error consultando canciones: ', error)
-      respuesta.send('Error consultando las canciones.')
+      respuesta.status(500).send('Error consultando las canciones.')
     } else {
-      respuesta.send({ canciones: canciones })
+      respuesta.status(200).send({ canciones: canciones })
     }
   })
 })
@@ -23,9 +23,9 @@ router.get('/:id', function (solicitud, respuesta) {
   Cancion.findById(solicitud.params.id, function (error, cancion) {
     if (error) {
       console.error('Error consultando cancion por el ID: ', error)
-      respuesta.send('Error consultando la canción.')
+      respuesta.status(500).send('Error consultando la canción.')
     } else {
-      respuesta.send({ cancion: cancion })
+      respuesta.status(200).send({ cancion: cancion })
     }
   })
 })
@@ -38,9 +38,9 @@ router.post('/', function (solicitud, respuesta) {
   nuevaCancion.save(function (error, cancionCreada) {
     if (error) {
       console.error('Error creando canción: ', error)
-      respuesta.send('Error actualizando la canción.')
+      respuesta.status(500).send('Error actualizando la canción.')
     } else {
-      respuesta.send(cancionCreada)
+      respuesta.status(201).send(cancionCreada)
     }
   })
 })
@@ -52,14 +52,14 @@ router.put('/:id', function(solicitud, respuesta) {
   Cancion.findByIdAndUpdate(solicitud.params.id, solicitud.body, function(error, cancionVieja) {
     if (error) {
       console.error('Error actualizando la canción: ', error)
-      respuesta.send('Error actualizando la canción.')
+      respuesta.status(500).send('Error actualizando la canción.')
     } else {
       Cancion.findById(solicitud.params.id, function (error, cancion) {
         if (error) {
           console.error('Error consultando la canción actualizada: ', error)
-          respuesta.send('Error consultando la canción actualizada.')
+          respuesta.status(500).send('Error consultando la canción actualizada.')
         } else {
-          respuesta.send({ cancion: cancion })
+          respuesta.status(200).send({ cancion: cancion })
         }
       })
     }
