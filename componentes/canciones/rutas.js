@@ -22,4 +22,15 @@ router.get('/:id', function(solicitud, respuesta) {
   })
 })
 
+router.post('/', function(solicitud, respuesta) {
+  const nuevaCancion = new Cancion(solicitud.body)
+  nuevaCancion.save(function(error, cancionCreada) {
+    if (error) {
+      console.error('Error creando canción: ', error)
+    } else {
+      respuesta.send(cancionCreada)
+    }
+  })
+})
+
 module.exports = router
