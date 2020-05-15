@@ -10,9 +10,9 @@ router.get('/', function (solicitud, respuesta) {
   Cancion.find(function (error, canciones) {
     if (error) {
       console.error('Error consultando canciones: ', error)
-      respuesta.status(500).send('Error consultando las canciones.')
+      respuesta.status(500).json({ mensaje: 'Error consultando las canciones.' })
     } else {
-      respuesta.status(200).send({ canciones: canciones })
+      respuesta.status(200).json(canciones)
     }
   })
 })
@@ -27,7 +27,7 @@ router.get('/:id', function (solicitud, respuesta) {
       console.error('Error consultando cancion por el ID: ', error)
       respuesta.status(500).json({ mensaje: 'Error consultando la canción.' })
     } else {
-      respuesta.status(200).json({ cancion: cancion })
+      respuesta.status(200).json(cancion)
     }
   })
 })
@@ -43,7 +43,7 @@ router.post('/', function (solicitud, respuesta) {
       console.error('Error creando canción: ', error)
       respuesta.status(500).json({ mensaje: 'Error actualizando la canción.' })
     } else {
-      respuesta.status(201).json({ cancion: cancionCreada })
+      respuesta.status(201).json(cancionCreada)
     }
   })
 })
@@ -63,7 +63,7 @@ router.put('/:id', function (solicitud, respuesta) {
           console.error('Error consultando la canción actualizada: ', error)
           respuesta.status(500).json({ mensaje: 'Error consultando la canción actualizada.' })
         } else {
-          respuesta.status(200).json({ cancion: cancion })
+          respuesta.status(200).json(cancion)
         }
       })
     }
