@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 
 // mongodb+srv://DB_USER:DB_PASSWORD@DB_HOST:DB_PORT/DB_NAME
+// mongodb://127.0.0.1:27017/bit_musica
 const conectarBaseDeDatos = async function () {
-  await mongoose.connect('mongodb://127.0.0.1:27017/bit_musica', {
+  await mongoose.connect('mongodb+srv://prueba-bit:12345bit@bit-5lgzk.mongodb.net/bit_musica', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
