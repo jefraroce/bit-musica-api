@@ -11,6 +11,6 @@ npm install
 node index.js
 ```
 
-### Información adicional
+## Información adicional
 
 [Documentación de la API - Postman](https://www.getpostman.com/collections/619590bf81a774cf0873)

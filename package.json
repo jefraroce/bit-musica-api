@@ -1,13 +1,13 @@
 {
-  "name": "bit_musica",
+  "name": "bit-musica-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API para la aplicación BIT Música",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jeisson Francois Rosas Céspedes <jeisson.rosas@bit.institute>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
