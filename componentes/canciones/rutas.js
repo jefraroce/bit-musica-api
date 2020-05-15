@@ -4,6 +4,7 @@ const Cancion = require('./modelo')
 
 /**
  * Consulta de todas las canciones
+ * GET /canciones
  */
 router.get('/', function (solicitud, respuesta) {
   Cancion.find(function (error, canciones) {
@@ -17,7 +18,8 @@ router.get('/', function (solicitud, respuesta) {
 })
 
 /**
- * Consultar una Canción
+ * Consulta una canción por su ID
+ * GET /canciones/:id
  */
 router.get('/:id', function (solicitud, respuesta) {
   Cancion.findById(solicitud.params.id, function (error, cancion) {
@@ -31,7 +33,8 @@ router.get('/:id', function (solicitud, respuesta) {
 })
 
 /**
- * Creación de una nueva canción
+ * Crea una nueva canción
+ * POST /canciones
  */
 router.post('/', function (solicitud, respuesta) {
   const nuevaCancion = new Cancion(solicitud.body)
@@ -46,7 +49,8 @@ router.post('/', function (solicitud, respuesta) {
 })
 
 /**
- * Actualización de Canciones
+ * Actualiza una canción por su ID
+ * PUT /canciones/:id
  */
 router.put('/:id', function(solicitud, respuesta) {
   Cancion.findByIdAndUpdate(solicitud.params.id, solicitud.body, function(error, cancionVieja) {
@@ -64,7 +68,21 @@ router.put('/:id', function(solicitud, respuesta) {
       })
     }
   })
+})
 
+/**
+ * Actualiza una canción por su ID
+ * DELETE /canciones/:id
+ */
+router.delete('/:id', function(solicitud, respuesta) {
+  Cancion.findByIdAndDelete(solicitud.params.id, function(error, cancionEliminada) {
+    if (error) {
+      console.error(`Error eliminando canción por el ID ${solicitud.params.id} `, error)
+      respuesta.status(500).send('La canción NO ha podido ser eliminada.')
+    } else {
+      respuesta.status(200).send('La canción se ha eliminado.')
+    }
+  })
 })
 
 module.exports = router
