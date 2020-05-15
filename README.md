@@ -4,10 +4,12 @@ API creada con [expressjs](https://expressjs.com/) para la aplicación BIT Músi
 
 ## Pasos de instalación y ejecución
 
-`git clone https://github.com/jefraroce/bit-musica-api.git`
-`cd bit-musica-api`
-`npm install`
-`node index.js`
+```shell
+git clone https://github.com/jefraroce/bit-musica-api.git
+cd bit-musica-api
+npm install
+node index.js
+```
 
 ### Información adicional
 
