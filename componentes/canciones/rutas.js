@@ -52,8 +52,8 @@ router.post('/', function (solicitud, respuesta) {
  * Actualiza una canción por su ID
  * PUT /canciones/:id
  */
-router.put('/:id', function(solicitud, respuesta) {
-  Cancion.findByIdAndUpdate(solicitud.params.id, solicitud.body, function(error, cancionVieja) {
+router.put('/:id', function (solicitud, respuesta) {
+  Cancion.findByIdAndUpdate(solicitud.params.id, solicitud.body, function (error, cancionVieja) {
     if (error) {
       console.error('Error actualizando la canción: ', error)
       respuesta.status(500).send('Error actualizando la canción.')
@@ -74,8 +74,8 @@ router.put('/:id', function(solicitud, respuesta) {
  * Actualiza una canción por su ID
  * DELETE /canciones/:id
  */
-router.delete('/:id', function(solicitud, respuesta) {
-  Cancion.findByIdAndDelete(solicitud.params.id, function(error, cancionEliminada) {
+router.delete('/:id', function (solicitud, respuesta) {
+  Cancion.findByIdAndDelete(solicitud.params.id, function (error, cancionEliminada) {
     if (error) {
       console.error(`Error eliminando canción por el ID ${solicitud.params.id} `, error)
       respuesta.status(500).send('La canción NO ha podido ser eliminada.')
