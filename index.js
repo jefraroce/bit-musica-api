@@ -8,7 +8,7 @@ conectarBaseDeDatos()
 
 // Inicializamos express
 const app = express()
-const PUERTO = 8080
+const PUERTO = process.env.PORT || 3000
 
 // Agregamos middlewares
 app.use(cors()) // Necesario para permitir requests desde cualquier dominio

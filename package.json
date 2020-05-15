@@ -4,7 +4,12 @@
   "description": "API para la aplicación BIT Música",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jefraroce/bit-musica-api.git"
   },
   "keywords": [],
   "author": "Jeisson Francois Rosas Céspedes <jeisson.rosas@bit.institute>",
