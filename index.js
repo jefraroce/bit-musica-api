@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const conectarBaseDeDatos = require('./bd')
 const rutasDeCanciones = require('./componentes/canciones/rutas')
+const rutasDeUsuarios = require('./componentes/usuarios/rutas')
 
 conectarBaseDeDatos()
 
@@ -18,6 +19,7 @@ app.get('/', function(solicitud, respuesta) {
   respuesta.send('<h1>¡Bienvenidos!</h1> <h3>Menu</h3><ul><li><a href="/canciones">Ver Canciones</a></li><li><a href="/usuarios">Ver Usuarios</a></li></ul>')
 })
 app.use('/canciones', rutasDeCanciones)
+app.use('/usuarios', rutasDeUsuarios)
 
 app.listen(PUERTO, function() {
   console.log(`Escuchando en http://localhost:${PUERTO}`)
