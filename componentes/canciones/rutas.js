@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Cancion = require('./modelo')
+const { responder } = require('../../utilidades/funciones')
 
 /**
  * Consulta de todas las canciones
@@ -8,12 +9,7 @@ const Cancion = require('./modelo')
  */
 router.get('/', function (solicitud, respuesta) {
   Cancion.find(function (error, canciones) {
-    if (error) {
-      console.error('Error consultando canciones: ', error)
-      respuesta.status(500).json({ mensaje: 'Error consultando las canciones.' })
-    } else {
-      respuesta.status(200).json(canciones)
-    }
+    responder(error, respuesta, canciones)
   })
 })
 
@@ -23,12 +19,7 @@ router.get('/', function (solicitud, respuesta) {
  */
 router.get('/:id', function (solicitud, respuesta) {
   Cancion.findById(solicitud.params.id, function (error, cancion) {
-    if (error) {
-      console.error('Error consultando cancion por el ID: ', error)
-      respuesta.status(500).json({ mensaje: 'Error consultando la canción.' })
-    } else {
-      respuesta.status(200).json(cancion)
-    }
+    responder(error, respuesta, cancion)
   })
 })
 
@@ -39,12 +30,7 @@ router.get('/:id', function (solicitud, respuesta) {
 router.post('/', function (solicitud, respuesta) {
   const nuevaCancion = new Cancion(solicitud.body)
   nuevaCancion.save(function (error, cancionCreada) {
-    if (error) {
-      console.error('Error creando canción: ', error)
-      respuesta.status(500).json({ mensaje: 'Error actualizando la canción.' })
-    } else {
-      respuesta.status(201).json(cancionCreada)
-    }
+    responder(error, respuesta, cancionCreada)
   })
 })
 
@@ -59,12 +45,7 @@ router.put('/:id', function (solicitud, respuesta) {
       respuesta.status(500).json({ mensaje: 'Error actualizando la canción.' })
     } else {
       Cancion.findById(solicitud.params.id, function (error, cancion) {
-        if (error) {
-          console.error('Error consultando la canción actualizada: ', error)
-          respuesta.status(500).json({ mensaje: 'Error consultando la canción actualizada.' })
-        } else {
-          respuesta.status(200).json(cancion)
-        }
+        responder(error, respuesta, cancion)
       })
     }
   })
@@ -76,12 +57,7 @@ router.put('/:id', function (solicitud, respuesta) {
  */
 router.delete('/:id', function (solicitud, respuesta) {
   Cancion.findByIdAndDelete(solicitud.params.id, function (error, cancionEliminada) {
-    if (error) {
-      console.error(`Error eliminando canción por el ID ${solicitud.params.id} `, error)
-      respuesta.status(500).json({ mensaje: 'La canción NO ha podido ser eliminada.' })
-    } else {
-      respuesta.status(200).json({ mensaje: 'La canción ha sido eliminada.' })
-    }
+    responder(error, respuesta, { mensaje: 'La canción ha sido eliminada.' }, 'La canción NO ha podido ser eliminada.')
   })
 })
 
