@@ -15,12 +15,14 @@ const PUERTO = process.env.PORT || 3000
 app.use(cors()) // Necesario para permitir requests desde cualquier dominio
 app.use(bodyParser.json())
 
+// Agregamos nuestras rutas
 app.get('/', function(solicitud, respuesta) {
-  respuesta.send('<h1>¡Bienvenidos!</h1> <h3>Menu</h3><ul><li><a href="/canciones">Ver Canciones</a></li><li><a href="/usuarios">Ver Usuarios</a></li></ul>')
+  respuesta.send('<h1>¡Bienvenidos!</h1> <h3>Menú</h3><ul><li><a href="/canciones">Ver Canciones</a></li><li><a href="/usuarios">Ver Usuarios</a></li></ul>')
 })
 app.use('/canciones', rutasDeCanciones)
 app.use('/usuarios', rutasDeUsuarios)
 
+// Encendemos el servidor de express
 app.listen(PUERTO, function() {
   console.log(`Escuchando en http://localhost:${PUERTO}`)
 })

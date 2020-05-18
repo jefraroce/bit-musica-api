@@ -29,8 +29,8 @@ router.get('/:id', function (solicitud, respuesta) {
  */
 router.post('/', function (solicitud, respuesta) {
   const nuevaUsuario = new Usuario(solicitud.body)
-  nuevaUsuario.save(function (error, usuarioCreada) {
-    responder(error, respuesta, usuarioCreada)
+  nuevaUsuario.save(function (error, usuarioCreado) {
+    responder(error, respuesta, usuarioCreado)
   })
 })
 
@@ -39,7 +39,7 @@ router.post('/', function (solicitud, respuesta) {
  * PUT /usuarios/:id
  */
 router.put('/:id', function (solicitud, respuesta) {
-  Usuario.findByIdAndUpdate(solicitud.params.id, solicitud.body, function (error, usuarioVieja) {
+  Usuario.findByIdAndUpdate(solicitud.params.id, solicitud.body, function (error, usuarioViejo) {
     if (error) {
       console.error('Error actualizando el usuario: ', error)
       respuesta.status(500).json({ mensaje: 'Error actualizando el usuario.' })
@@ -56,7 +56,7 @@ router.put('/:id', function (solicitud, respuesta) {
  * DELETE /usuarios/:id
  */
 router.delete('/:id', function (solicitud, respuesta) {
-  Usuario.findByIdAndDelete(solicitud.params.id, function (error, usuarioEliminada) {
+  Usuario.findByIdAndDelete(solicitud.params.id, function (error, usuarioEliminado) {
     responder(error, respuesta, { mensaje: 'El usuario ha sido eliminado.' }, 'El usuario NO ha podido ser eliminado.')
   })
 })
