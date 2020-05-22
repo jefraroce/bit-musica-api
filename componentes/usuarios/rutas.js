@@ -12,7 +12,7 @@ const {
  * GET /usuarios
  */
 router.get("/", function(solicitud, respuesta) {
-    Usuario.find(function(error, usuarios) {
+    Usuario.find({}, ['nombre', 'correoElectronico', 'avatar'], function(error, usuarios) {
         responder(error, respuesta, usuarios);
     });
 });
@@ -35,8 +35,11 @@ router.get("/:id", function(solicitud, respuesta) {
     });
 });
 
+/**
+ * Crea una nueva sesión
+ * POST /usuarios/login
+ */
 router.post("/login", function(solicitud, respuesta) {
-    console.log(solicitud.params);
     Usuario.find({
             correoElectronico: solicitud.body.correoElectronico,
             contrasena: solicitud.body.contrasena,

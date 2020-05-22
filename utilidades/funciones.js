@@ -21,8 +21,7 @@ const enviarCorreo = function(correoElectronico, asunto, mensaje) {
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
-        secure: true,
-
+        secure: false,
         auth: {
             user: "bitmusica2@gmail.com",
             pass: "Bit-music@",
@@ -30,17 +29,19 @@ const enviarCorreo = function(correoElectronico, asunto, mensaje) {
     });
 
     const mailOptions = {
-        from: "bitmusica2@gmail.com",
+        from: '"BIT Música 👻" <info@bit-musica.com>',
         to: correoElectronico,
         subject: asunto,
         text: mensaje,
+        html: `<h1>¡¡¡Muchas gracias por tu mensaje!!!</h1>
+    <p>Cordialmente,<br/>BIT Música</p>`,
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
-            console.log(error);
+            console.error("Error enviando correo: ", error);
         } else {
-            console.log("Email sent: " + info.response);
+            console.log("El correo ha sido enviado: ", info.response);
         }
     });
 };
