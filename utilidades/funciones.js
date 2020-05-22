@@ -71,4 +71,27 @@ const responderloggin = function(
     }
 };
 
-module.exports = { responder, enviarCorreo, responderloggin };
+const responderEmail = function(
+    error,
+    respuesta,
+    valorAEnviarEnExito,
+    mensajeDeError,
+    codigoDeEstado
+) {
+    if (error) {
+        respuesta
+            .status(codigoDeEstado || 500)
+            .json({ mensaje: mensajeDeError || error });
+        console.error("[Error en Base De Datos] : ", error);
+    } else if (valorAEnviarEnExito.length != 0) {
+        respuesta
+            .status(codigoDeEstado || 403)
+            .json({ mensaje: "Correo Electronico ya existe" });
+    } else {
+        respuesta
+            .status(codigoDeEstado || 200)
+            .json({ mensaje: "Usuario no encontrado" });
+    }
+};
+
+module.exports = { responder, enviarCorreo, responderloggin, responderEmail };

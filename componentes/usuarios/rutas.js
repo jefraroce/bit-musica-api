@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Usuario = require("./modelo");
-const { responder, responderloggin } = require("../../utilidades/funciones");
+const {
+    responder,
+    responderloggin,
+    responderEmail,
+} = require("../../utilidades/funciones");
 
 /**
  * Consulta de todas las usuarios
@@ -11,6 +15,14 @@ router.get("/", function(solicitud, respuesta) {
     Usuario.find(function(error, usuarios) {
         responder(error, respuesta, usuarios);
     });
+});
+
+router.post("/email", function(solicitud, respuesta) {
+    Usuario.find({ correoElectronico: solicitud.body.correoElectronico },
+        function(error, usuario) {
+            responderEmail(error, respuesta, usuario);
+        }
+    );
 });
 
 /**
@@ -27,7 +39,7 @@ router.post("/login", function(solicitud, respuesta) {
     console.log(solicitud.params);
     Usuario.find({
             correoElectronico: solicitud.body.correoElectronico,
-            contraseña: solicitud.body.contrasena,
+            contrasena: solicitud.body.contrasena,
         },
         function(error, usuario) {
             responderloggin(error, respuesta, usuario);
@@ -36,7 +48,7 @@ router.post("/login", function(solicitud, respuesta) {
 });
 
 /**
- * Crea una nueva canción
+ * Crea un nuevo usuario
  * POST /usuarios
  */
 router.post("/", function(solicitud, respuesta) {
