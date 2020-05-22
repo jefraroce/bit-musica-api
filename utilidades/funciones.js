@@ -1,3 +1,5 @@
+const nodemailer = require("nodemailer");
+
 const responder = function(
     error,
     respuesta,
@@ -14,6 +16,35 @@ const responder = function(
         respuesta.status(codigoDeEstado || 200).json(valorAEnviarEnExito);
     }
 };
+
+const enviarCorreo = function(correoElectronico, asunto, mensaje) {
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: true,
+
+        auth: {
+            user: "bitmusica2@gmail.com",
+            pass: "Bit-music@",
+        },
+    });
+
+    const mailOptions = {
+        from: "bitmusica2@gmail.com",
+        to: correoElectronico,
+        subject: asunto,
+        text: mensaje,
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("Email sent: " + info.response);
+        }
+    });
+};
+
 const responderloggin = function(
     error,
     respuesta,
@@ -40,4 +71,4 @@ const responderloggin = function(
     }
 };
 
-module.exports = { responder, responderloggin };
+module.exports = { responder, enviarCorreo, responderloggin };
